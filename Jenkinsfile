@@ -1,5 +1,5 @@
 pipeline{
-    agent {label 'linux'}
+    agent any
     
     environment {
         DOCKERHUB_CREDENTIALS=credentials('Jenkins-pipeline')
@@ -15,7 +15,7 @@ pipeline{
         
         stage('Build') {
             steps{
-                sh 'docker build -t sureshrajuvetukuri/nodeapp_test:latest .'
+                sh 'docker build -t suresh394/nodeapp_test:latest .'
             }
         }
         
@@ -28,13 +28,8 @@ pipeline{
         stage('Push') {
         
             steps{
-                sh 'docker push sureshrajuvetukuri/nodeapp_test:latest'
+                sh 'docker image push suresh394/nodeapp_test:latest'
             }
         }
-        
-        post {
-            always {
-                sh 'docker logout'
-            }
-        }   
-     }  
+     }   
+  }  
